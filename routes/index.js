@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var mongoose = require('mongoose');
+var get_object_id = require('../helper');
 
 var Band = require('../models/band');
 
@@ -10,9 +10,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/bands', function(req, res, next) {
-  console.log('in bands get');
   Band.find({}, function (err, docs) {
-    console.log(docs);
     res.render('bands', { title: 'Bands', bands: docs});
   });
 });
@@ -23,7 +21,6 @@ router.get('/band', function(req, res, next) {
 });
 
 router.post('/band', function(req, res, next) {
-  console.log(req.body)
   var band = new Band({
             name: req.body.name
             });
@@ -35,10 +32,8 @@ router.post('/band', function(req, res, next) {
 });
 
 router.get('/band/:id', function(req, res, next) {
-  console.log(req.params.id);
-  var Object_id = mongoose.Types.ObjectId(req.params.id);
-  Band.findById(Object_id, function(err, band) {
 
+  Band.findById(get_object_id(req.params.id), function(err, band) {
     if(err) {
       console.log("was not able to find a band for id %s with: ", object_id, err)
     }
@@ -47,8 +42,7 @@ router.get('/band/:id', function(req, res, next) {
 });
 
 router.post('/band/:id', function(req, res,next) {
-  var object_id = mongoose.Types.ObjectId(req.params.id);
-  Band.findById(object_id, function(err, band) {
+  Band.findById(get_object_id(req.params.id), function(err, band) {
     band.name = req.body.name;
     band.save(function(err, band) {
       if (err) {
