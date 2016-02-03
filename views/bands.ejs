@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+
+    <table>
+      <% bands.forEach(function(band){ %>
+        <tr>
+          <td>name</td>
+          <td><%= band.name %></td>
+          <td>
+            <a href="band/<%= band._id %>">edit</a>
+          </td>
+      <% }); %>
+    </ul>
+
+
+  </body>
+</html>
