@@ -6,8 +6,6 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
-
-
 mongoose.connect('localhost:27017/jazzfest')
 
 var db = mongoose.connection;
@@ -18,13 +16,9 @@ db.once('open', function() {
   // we're connected!
 });
 
-
-
-
-
-
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var locations = require('./routes/locations');
 
 var app = express();
 
@@ -42,6 +36,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
+app.use('/locations', locations);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
