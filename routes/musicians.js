@@ -14,18 +14,28 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/new', function(req, res, next) {
-  res.render('musician_form', { title: "new musician"} );
+  Band.find({}, function(error, bands) {
+    res.render('musician_form', { title: "new musician", bands: bands} );
+  });
 });
 
 router.post('/new', function(req, res, next) {
+
   var musician = new Musician({
-            name: req.body.name
-            });
+    name: req.body.name,
+    band: req.body.band_id
+  });
+
+  console.log("band id: ", req.body.band_id);
+
   musician.save(function(err) {
-    if (err) throw err;
+    if (err) {
+      throw err;
+    }
     console.log('new musician saved successfully');
     res.redirect('/musicians')
   });
+
 });
 
 router.get('/edit/:id', function(req, res, next) {

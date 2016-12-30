@@ -13,10 +13,16 @@
         <div>
             <form name="musician" method="post" action="/musicians/new">
                 <fieldset>
-                    <label>Name</label>
-                    <input type="text" name="name">
+                  <label>Name</label>
+                  <input type="text" name="name">
+
+                  <select name="band_id">
+                    <% bands.forEach(function(band) { %>
+                      <option value=<%= band._id %>><%= band.name %>
+                    <% }) %>
+                  </select>
                 </fieldset>
-                    <input type="submit" value="Save">
+                <input type="submit" value="Save">
             </form>
         </div>
     </div>
