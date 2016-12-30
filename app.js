@@ -22,6 +22,7 @@ var locations = require('./routes/locations');
 var bands = require('./routes/bands');
 var musicians = require('./routes/musicians');
 var festivals = require('./routes/festivals');
+var performances = require('./routes/performances');
 
 var app = express();
 
@@ -47,6 +48,7 @@ app.use('/locations', locations);
 app.use('/bands', bands);
 app.use('/musicians', musicians);
 app.use('/festivals', festivals);
+app.use('/performances', performances);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

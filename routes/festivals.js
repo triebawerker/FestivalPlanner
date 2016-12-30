@@ -10,7 +10,7 @@ router.get('/', function(req, res, next) {
   });
 });
 
-/* GET form band */
+/* GET form festival */
 router.get('/new', function(req, res, next) {
   res.render('festival/festival_form', { title: "new festival"} );
 });
