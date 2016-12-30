@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+
+    <a href="/festivals/new">new</a>
+
+    <table>
+      <% festivals.forEach(function(festival){ %>
+        <tr>
+          <td>name</td>
+          <td><%= festival.name %></td>
+          <td>
+            <a href="/festivals/edit/<%= festival._id %>">edit</a>
+          </td>
+      <% }); %>
+    </ul>
+
+
+  </body>
+</html>

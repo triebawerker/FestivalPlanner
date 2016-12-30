@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>edit band with id: <%= festival.id %></p>
+
+    <div class="content">
+        <div>
+            <form name="festival" method="post" action="/festivals/update/<%= festival.id %>">
+                <fieldset>
+                    <label>Name</label>
+                    <input type="text" name="name" value="<%= festival.name %>">
+                    <input type="text" name="year" value="<%= festival.year %>">
+                </fieldset>
+                    <input type="submit" value="Save">
+            </form>
+        </div>
+    </div>
+
+  </body>
+</html>

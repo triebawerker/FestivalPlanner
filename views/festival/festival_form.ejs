@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+
+    <h2>New festival</h2>
+
+    <div class="content">
+        <div>
+            <form name="festival" method="post" action="/festivals/new">
+                <fieldset>
+                    <label>Name</label>
+                    <input type="text" name="name">
+                    <label>Year</label>
+                    <input type="text" name="year">
+                </fieldset>
+                    <input type="submit" value="Save">
+            </form>
+        </div>
+    </div>
+
+  </body>
+</html>
