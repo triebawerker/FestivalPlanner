@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>edit musician with id: <%= musician.id %></p>
+
+    <div class="content">
+        <div>
+            <form name="band" method="post" action="/musicians/update/<%= musician.id %>">
+                <fieldset>
+                    <label>Name</label>
+                    <input type="text" name="name" value="<%= musician.name %>">
+                </fieldset>
+                    <input type="submit" value="Save">
+            </form>
+        </div>
+    </div>
+
+  </body>
+</html>
