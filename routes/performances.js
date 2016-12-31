@@ -19,13 +19,28 @@ router.get('/', function(req, res, next) {
 
 /* GET form performance */
 router.get('/new', function(req, res, next) {
-  res.render('performance/performance_form',{ title: "new performance"} );
+  Festival.find({}, function(festivalError, festivals) {
+    Location.find({}, function(locationError, locations) {
+      Band.find({}, function(bandError, bands) {
+        res.render('performance/performance_form',
+                   { title: "new performance",
+                     festivals: festivals,
+                     locations: locations,
+                     bands    : bands});
+      });
+    });
+  });
 });
 
 router.post('/new', function(req, res, next) {
   var performance = new Performance({
-            name: req.body.name
-            });
+    name:      req.body.name,
+    from:      req.body.from,
+    to:        req.body.to,
+    festival:  req.body.festival_id,
+    location:  req.body.location_id,
+    band:      req.body.band_id
+  });
   performance.save(function(err) {
     if (err) throw err;
     console.log('new performance saved successfully');
@@ -46,7 +61,6 @@ router.get('/edit/:id', function(req, res, next) {
             console.log("was not able to find a performance for id %s with: ", object_id, err)
           }
 
-          console.log("festivals", festivals);
           res.render('performance/performance_edit',
                      { title: "Edit performance",
                        performance: performance,
@@ -63,6 +77,8 @@ router.get('/edit/:id', function(req, res, next) {
 router.post('/update/:id', function(req, res,next) {
   Performance.findById(get_object_id(req.params.id), function(err, performance) {
     performance.name     = req.body.name;
+    performance.from     = req.body.from;
+    performance.to       = req.body.to;
     performance.festival = req.body.festival_id;
     performance.location = req.body.location_id;
     performance.band     = req.body.band_id;

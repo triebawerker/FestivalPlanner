@@ -14,7 +14,11 @@
                 <fieldset>
                     <label>Name</label>
                     <input type="text" name="name" value="<%= performance.name %>">
+                    <input type="text" name="from" value="<%= performance.from %>" placeholder="2016-01-01 10:15">
+                    <input type="text" name="to"   value="<%= performance.to   %>" placeholder="2016-01-01 10:15">
+                </fieldset>
 
+                <fieldset>
                     <select name=festival_id >
                       <% festivals.forEach(function(festival) { %>
 

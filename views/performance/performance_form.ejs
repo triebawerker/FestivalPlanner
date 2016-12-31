@@ -15,6 +15,42 @@
                 <fieldset>
                     <label>Name</label>
                     <input type="text" name="name">
+                    <label>from</label>
+                    <input type="text" name="from" placeholder="2016-01-01 10:15">
+                    <label>to</label>
+                  <input type="text" name="to" placeholder="2016-01-01 10:15">
+                </fieldset>
+
+                <fieldset>
+                    <select name=festival_id >
+                      <% festivals.forEach(function(festival) { %>
+
+                        <option value=<%= festival._id %>
+
+                          ><%= festival.name %>
+                        </options>
+                      <% }) %>
+                    </select>
+
+                    <select name=location_id >
+                      <% locations.forEach(function(location) { %>
+
+                        <option value=<%= location._id %>
+
+                          ><%= location.name %>
+                        </options>
+                      <% }) %>
+                    </select>
+
+                    <select name=band_id >
+                      <% bands.forEach(function(band) { %>
+
+                        <option value=<%= band._id %>
+
+                          ><%= band.name %>
+                        </options>
+                      <% }) %>
+                    </select>
                 </fieldset>
                     <input type="submit" value="Save">
             </form>
