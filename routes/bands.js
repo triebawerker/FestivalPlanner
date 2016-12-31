@@ -6,13 +6,13 @@ var Band = require('../models/band');
 
 router.get('/', function(req, res, next) {
   Band.find({}, function (err, docs) {
-    res.render('bands', { title: 'Bands', bands: docs});
+    res.render('band/bands', { title: 'Bands', bands: docs});
   });
 });
 
 /* GET form band */
 router.get('/new', function(req, res, next) {
-  res.render('band_form', { title: "new band"} );
+  res.render('band/band_form', { title: "new band"} );
 });
 
 router.post('/new', function(req, res, next) {
@@ -32,7 +32,7 @@ router.get('/edit/:id', function(req, res, next) {
     if(err) {
       console.log("was not able to find a band for id %s with: ", object_id, err)
     }
-    res.render('band_edit', { title: "Edit band", band: band });
+    res.render('band/band_edit', { title: "Edit band", band: band });
   });
 });
 
