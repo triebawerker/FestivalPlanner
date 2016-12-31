@@ -7,12 +7,12 @@ var Location = require('../models/location');
 router.get('/', function(req, res, next) {
   Location.find({}, function(err, locations) {
     console.log(locations);
-    res.render('locations', { title: 'Locations', locations: locations});
+    res.render('location/locations', { title: 'Locations', locations: locations});
   });
 });
 
 router.get('/new', function(req, res, next) {
-  res.render('location_form', { title: "new location"} );
+  res.render('location/location_form', { title: "new location"} );
 });
 
 router.post('/new', function(req, res, next) {
@@ -31,7 +31,7 @@ router.get('/edit/:id', function(req, res, next) {
     if(err) {
       console.log("was not able to find a location for id %s with: ", object_id, err)
     }
-    res.render('location_edit', { title: "Edit location", location: location });
+    res.render('location/location_edit', { title: "Edit location", location: location });
   });
 });
 
