@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+
+    <h2>New performance</h2>
+
+    <div class="content">
+        <div>
+            <form name="performance" method="post" action="/performances/new">
+                <fieldset>
+                    <label>Name</label>
+                    <input type="text" name="name">
+                </fieldset>
+                    <input type="submit" value="Save">
+            </form>
+        </div>
+    </div>
+
+  </body>
+</html>

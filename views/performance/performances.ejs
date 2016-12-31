@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+
+    <a href="/performances/new">new</a>
+
+    <table>
+      <% performances.forEach(function(performance){ %>
+        <tr>
+          <td><%= performance.name %>:</td>
+          <td><%= performance.band.name %> play</td>
+          <td>at <%= performance.festival.name %></td>
+          <td>in <%= performance.location.name %></td>
+
+          <td>
+            <a href="performances/edit/<%= performance._id %>">edit</a>
+          </td>
+      <% }); %>
+    </table>
+  </body>
+</html>
