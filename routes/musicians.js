@@ -9,7 +9,7 @@ router.get('/', function(req, res, next) {
   Musician.find({})
     .populate('band')
     .exec(function (err, docs) {
-    res.render('musicians', { title: 'Musicians', musicians: docs});
+    res.render('musician/musicians', { title: 'Musicians', musicians: docs});
   });
 });
 
