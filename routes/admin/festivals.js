@@ -1,8 +1,8 @@
 var express = require('express');
 var router = express.Router();
-var get_object_id = require('../helper');
+var get_object_id = require('../../helper');
 
-var Festival = require('../models/festival');
+var Festival = require('../../models/festival');
 
 router.get('/', function(req, res, next) {
   Festival.find({}, function (err, docs) {
@@ -24,7 +24,7 @@ router.post('/new', function(req, res, next) {
   festival.save(function(err) {
     if (err) throw err;
       console.log('new festival saved successfully');
-    res.redirect('/festivals')
+    res.redirect('/admin/festivals')
   });
 });
 
@@ -47,7 +47,7 @@ router.post('/update/:id', function(req, res,next) {
         res.send('unable to save festival');
       }
       else {
-        res.redirect('/festivals');
+        res.redirect('/admin/festivals');
       };
     });
   });

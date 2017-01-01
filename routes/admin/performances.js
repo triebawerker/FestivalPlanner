@@ -1,11 +1,11 @@
 var express = require('express');
 var router = express.Router();
-var get_object_id = require('../helper');
+var get_object_id = require('../../helper');
 
-var Performance = require('../models/performance');
-var Festival = require('../models/festival');
-var Location = require('../models/location');
-var Band = require('../models/band');
+var Performance = require('../../models/performance');
+var Festival = require('../../models/festival');
+var Location = require('../../models/location');
+var Band = require('../../models/band');
 
 router.get('/', function(req, res, next) {
   Performance.find({})
@@ -44,7 +44,7 @@ router.post('/new', function(req, res, next) {
   performance.save(function(err) {
     if (err) throw err;
     console.log('new performance saved successfully');
-    res.redirect('/performances')
+    res.redirect('/admin/performances')
   });
 });
 
@@ -87,7 +87,7 @@ router.post('/update/:id', function(req, res,next) {
         res.send('unable to save performance');
       }
       else {
-        res.redirect('/performances');
+        res.redirect('/admin/performances');
       };
     });
   });

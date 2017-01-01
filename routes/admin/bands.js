@@ -1,8 +1,8 @@
 var express = require('express');
 var router = express.Router();
-var get_object_id = require('../helper');
+var get_object_id = require('../../helper');
 
-var Band = require('../models/band');
+var Band = require('../../models/band');
 
 router.get('/', function(req, res, next) {
   Band.find({}, function (err, docs) {
@@ -22,7 +22,7 @@ router.post('/new', function(req, res, next) {
   band.save(function(err) {
     if (err) throw err;
     console.log('new band saved successfully');
-    res.redirect('/bands')
+    res.redirect('/admin/bands')
   });
 });
 
@@ -38,13 +38,15 @@ router.get('/edit/:id', function(req, res, next) {
 
 router.post('/update/:id', function(req, res,next) {
   Band.findById(get_object_id(req.params.id), function(err, band) {
+  console.log("store new name");
     band.name = req.body.name;
     band.save(function(err, band) {
       if (err) {
         res.send('unable to save band');
       }
       else {
-        res.redirect('/bands');
+      console.log("it should redirect");
+        res.redirect('/admin/bands');
       };
     });
   });

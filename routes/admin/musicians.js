@@ -1,9 +1,9 @@
 var express = require('express');
 var router = express.Router();
-var get_object_id = require('../helper');
+var get_object_id = require('../../helper');
 
-var Musician = require('../models/musician');
-var Band = require('../models/band');
+var Musician = require('../../models/musician');
+var Band = require('../../models/band');
 
 router.get('/', function(req, res, next) {
   Musician.find({})
@@ -33,7 +33,7 @@ router.post('/new', function(req, res, next) {
       throw err;
     }
     console.log('new musician saved successfully');
-    res.redirect('/musicians')
+    res.redirect('/admin/musicians')
   });
 
 });
@@ -54,7 +54,7 @@ router.get('/edit/:id', function(req, res, next) {
         console.log("was not able to find a musician for id %s with: ", object_id, err)
       }
 
-      res.render('musician_edit', { title: "Edit musician", musician: docs, bands: bandsList });
+      res.render('musician/musician_edit', { title: "Edit musician", musician: docs, bands: bandsList });
     });
   });
 });
@@ -68,7 +68,7 @@ router.post('/update/:id', function(req, res,next) {
         res.send('unable to save musician');
       }
       else {
-        res.redirect('/musicians');
+        res.redirect('/admin/musicians');
       };
     });
   });

@@ -1,8 +1,8 @@
 var express = require('express');
 var router = express.Router();
-var get_object_id = require('../helper');
+var get_object_id = require('../../helper');
 
-var Location = require('../models/location');
+var Location = require('../../models/location');
 
 router.get('/', function(req, res, next) {
   Location.find({}, function(err, locations) {
@@ -22,7 +22,7 @@ router.post('/new', function(req, res, next) {
   location.save(function(err) {
     if (err) throw err;
     console.log('new location saved successfully');
-    res.redirect('/locations')
+    res.redirect('/admin/locations')
   });
 });
 
@@ -43,7 +43,7 @@ router.post('/update/:id', function(req, res,next) {
         res.send('unable to save location');
       }
       else {
-        res.redirect('/locations');
+        res.redirect('/admin/locations');
       };
     });
   });

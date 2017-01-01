@@ -6,13 +6,13 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
-var passport = require('passport')
+var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
+const MongoStore = require('connect-mongo')(session);
 
 mongoose.connect('localhost:27017/jazzfest')
 
 var db = mongoose.connection;
-
 
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
@@ -20,12 +20,11 @@ db.once('open', function() {
 });
 
 var routes = require('./routes/index');
-var locations = require('./routes/locations');
-var bands = require('./routes/bands');
-var musicians = require('./routes/musicians');
-var festivals = require('./routes/festivals');
-var performances = require('./routes/performances');
-
+var locations = require('./routes/admin/locations');
+var bands = require('./routes/admin/bands');
+var musicians = require('./routes/admin/musicians');
+var festivals = require('./routes/admin/festivals');
+var performances = require('./routes/admin/performances');
 
 var app = express();
 
@@ -40,34 +39,55 @@ app.set('view engine', 'ejs');
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
+
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
 
-//passport settings
+/*passport settings
 app.use(session({
     secret: 'keyboard cat',
     resave: false,
     saveUninitialized: false,
     cookie: { secure: true }
-}));
+}));*/
+
+var sessionOpts = {
+  saveUninitialized: true, // saved new sessions
+  resave: false, // do not automatically write to the session store
+  store: new MongoStore({ mongooseConnection: mongoose.connection }),
+  //store: sessionStore,
+  //secret: config.session.secret,
+  secret: 'keyboard cat',
+  cookie : { httpOnly: true, maxAge: 2419200000 } // configure when sessions expires
+}
+
+app.use(session(sessionOpts));
 app.use(passport.initialize());
-app.use(passport.session());
-
-app.use(express.static(path.join(__dirname, 'public')));
-
-app.use('/', routes);
-app.use('/locations', locations);
-app.use('/bands', bands);
-app.use('/musicians', musicians);
-app.use('/festivals', festivals);
-app.use('/performances', performances);
+// call passport for admin routes
+app.use(function(req, res, next){
+console.log("any route for admin has been called", req.url);
+  if(req.url.match('/admin/bands'))
+    passport.session()(req, res, next)
+  else
+    next(); // do not invoke passport
+});
+//app.use(passport.session());
 
 // passport config
 var Account = require('./models/account');
 passport.use(new LocalStrategy(Account.authenticate()));
 passport.serializeUser(Account.serializeUser());
 passport.deserializeUser(Account.deserializeUser());
+
+app.use('/', routes);
+app.use('/admin/locations', locations);
+app.use('/admin/bands', bands);
+app.use('/admin/musicians', musicians);
+app.use('/admin/festivals', festivals);
+app.use('/admin/performances', performances);
+
 
 
 // catch 404 and forward to error handler
@@ -100,6 +120,5 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
-
 
 module.exports = app;
