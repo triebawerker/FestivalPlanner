@@ -45,22 +45,13 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-/*passport settings
-app.use(session({
-    secret: 'keyboard cat',
-    resave: false,
-    saveUninitialized: false,
-    cookie: { secure: true }
-}));*/
-
 var sessionOpts = {
   saveUninitialized: true, // saved new sessions
   resave: false, // do not automatically write to the session store
   store: new MongoStore({ mongooseConnection: mongoose.connection }),
-  //store: sessionStore,
   //secret: config.session.secret,
   secret: 'keyboard cat',
-  cookie : { httpOnly: true, maxAge: 2419200000 } // configure when sessions expires
+  cookie : { secure: false, httpOnly: true, maxAge: 2419200000 } // configure when sessions expires
 }
 
 app.use(session(sessionOpts));
@@ -68,10 +59,14 @@ app.use(passport.initialize());
 // call passport for admin routes
 app.use(function(req, res, next){
 console.log("any route for admin has been called", req.url);
-  if(req.url.match('/admin/bands'))
+  if(req.url.match('/admin/*')) {
+  	console.log("it should call the session now");
+  	console.log(req.session);
     passport.session()(req, res, next)
-  else
+  } else {
+
     next(); // do not invoke passport
+  }
 });
 //app.use(passport.session());
 

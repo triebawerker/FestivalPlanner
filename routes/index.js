@@ -5,6 +5,15 @@ var get_object_id = require('../helper');
 
 var Account = require('../models/account');
 
+router.get('/admin/*', function(req, res, next) {
+console.log("user", req.user);
+	if (req.user)
+		next();
+	else
+		res.redirect('/login');
+
+});
+
 router.get('/', function(req, res, next) {
   res.render('index', {});
 });
