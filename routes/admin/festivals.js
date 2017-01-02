@@ -7,13 +7,13 @@ var Festival = require('../../models/festival');
 router.get('/', function(req, res, next) {
   Festival.find({}, function (err, docs) {
     console.log("I am here with data ", docs);
-    res.render('festival/festivals', { title: 'Festival', festivals: docs});
+    res.render('festival/festivals', { title: 'Festivals', festivals: docs});
   });
 });
 
 /* GET form festival */
 router.get('/new', function(req, res, next) {
-  res.render('festival/festival_form', { title: "new festival"} );
+  res.render('festival/festival_form', { title: "New festival"} );
 });
 
 router.post('/new', function(req, res, next) {

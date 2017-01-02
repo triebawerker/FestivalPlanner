@@ -1,11 +1,7 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Register</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-		<h1>Register</h1>
+<% include ../partials/head %>
+<% include ../partials/header %>
+
+
 		<% if(typeof error !== 'undefined' && error.length > 1) {%>
 			<h1>Your registration has not been successful</h1>
 			<p><%= error %></p>
@@ -24,5 +20,5 @@
             <input type="submit" value="Register"/>
         </div>
     </form>
-  </body>
-</html>
+
+<% include ../partials/footer %>

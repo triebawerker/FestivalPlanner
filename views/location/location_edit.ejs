@@ -1,25 +1,17 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>edit location with id: <%= location.id %>, <%= location.name %> </p>
+<% include ../partials/head %>
+<% include ../partials/header %>
 
-    <div class="content">
-        <div>
-            <form name="location" method="post" action="/admin/locations/update/<%= location.id %>">
-                <fieldset>
-                    <label>Name</label>
-                    <input type="text" name="name" value="<%= location.name %>">
-                </fieldset>
-                    <input type="submit" value="Save">
+	<div class="content">
+			<div>
+					<form name="location" method="post" action="/admin/locations/update/<%= location.id %>">
+							<fieldset>
+									<label>Name</label>
+									<input type="text" name="name" value="<%= location.name %>">
+							</fieldset>
+									<input type="submit" value="Save">
 
-            </form>
-        </div>
-    </div>
+					</form>
+			</div>
+	</div>
 
-  </body>
-</html>
+<% include ../partials/footer %>

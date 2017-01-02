@@ -1,42 +1,29 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>edit musician with id: <%= musician.id %></p>
-     <p> selected band:
-    <%= musician.band.name %>
-  </p>
+<% include ../partials/head %>
+<% include ../partials/header %>
 
-    <div class="content">
-        <div>
-            <form name="band" method="post" action="/admin/musicians/update/<%= musician.id %>">
-                <fieldset>
-                    <label>Name</label>
-                    <input type="text" name="name" value="<%= musician.name %>">
+	<div class="content">
+			<div>
+					<form name="band" method="post" action="/admin/musicians/update/<%= musician.id %>">
+							<fieldset>
+									<label>Name</label>
+									<input type="text" name="name" value="<%= musician.name %>">
 
-                    <select name=band_id >
-                      <% bands.forEach(function(band) { %>
+									<select name=band_id >
+										<% bands.forEach(function(band) { %>
 
-                        <option value=<%= band._id %>
-                          <% if (musician.band.name == band.name) { %>
-                            selected="<%= band.name %>"
-                          <% } %>
-                          ><%= band.name %>
-                        </options>
-                      <% }) %>
-                    </select>
+											<option value=<%= band._id %>
+												<% if (musician.band.name == band.name) { %>
+													selected="<%= band.name %>"
+												<% } %>
+												><%= band.name %>
+											</options>
+										<% }) %>
+									</select>
 
-                </fieldset>
-                <input type="submit" value="Save">
-            </form>
-        </div>
-    </div>
+							</fieldset>
+							<input type="submit" value="Save">
+					</form>
+			</div>
+	</div>
 
-
-
-  </body>
-</html>
+<% include ../partials/footer %>

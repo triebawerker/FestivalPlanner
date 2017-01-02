@@ -1,25 +1,17 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
+<% include ../partials/head %>
+<% include ../partials/header %>
 
-    <a href="/admin/bands/new">new</a>
+	<a href="/admin/bands/new">new</a>
 
-    <table>
-      <% bands.forEach(function(band){ %>
-        <tr>
-          <td>name</td>
-          <td><%= band.name %></td>
-          <td>
-            <a href="/admin/bands/edit/<%= band._id %>">edit</a>
-          </td>
-      <% }); %>
-    </ul>
+	<table>
+		<% bands.forEach(function(band){ %>
+			<tr>
+				<td>name</td>
+				<td><%= band.name %></td>
+				<td>
+					<a href="/admin/bands/edit/<%= band._id %>">edit</a>
+				</td>
+		<% }); %>
+	</table>
 
-
-  </body>
-</html>
+<% include ../partials/footer %>

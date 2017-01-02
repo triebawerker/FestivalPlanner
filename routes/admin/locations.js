@@ -12,7 +12,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/new', function(req, res, next) {
-  res.render('location/location_form', { title: "new location"} );
+  res.render('location/location_form', { title: "New location"} );
 });
 
 router.post('/new', function(req, res, next) {

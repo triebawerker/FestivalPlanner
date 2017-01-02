@@ -23,7 +23,7 @@ router.get('/new', function(req, res, next) {
     Location.find({}, function(locationError, locations) {
       Band.find({}, function(bandError, bands) {
         res.render('performance/performance_form',
-                   { title: "new performance",
+                   { title: "New performance",
                      festivals: festivals,
                      locations: locations,
                      bands    : bands});

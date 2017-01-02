@@ -12,7 +12,7 @@ router.get('/', function(req, res, next) {
 
 /* GET form band */
 router.get('/new', function(req, res, next) {
-  res.render('band/band_form', { title: "new band"} );
+  res.render('band/band_form', { title: "New band"} );
 });
 
 router.post('/new', function(req, res, next) {

@@ -15,12 +15,12 @@ console.log("user", req.user);
 });
 
 router.get('/', function(req, res, next) {
-  res.render('index', {});
+  res.render('index', {title: "Welcome"});
 });
 
 router.get('/register', function(req, res) {
 		console.log("register form");
-    res.render('account/register', {});
+    res.render('account/register', {title: "Sign up"});
 });
 
 router.post('/register', function(req, res) {
@@ -41,7 +41,7 @@ router.post('/register', function(req, res) {
 });
 
 router.get('/login', function(req, res) {
-    res.render('account/login', { user : req.user });
+    res.render('account/login', { title: "Sign in" });
 });
 
 router.post('/login', passport.authenticate('local'), function(req, res) {

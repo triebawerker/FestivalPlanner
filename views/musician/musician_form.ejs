@@ -1,31 +1,22 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
+<% include ../partials/head %>
+<% include ../partials/header %>
 
-    <h2>New Musician</h2>
+	<div class="content">
+			<div>
+					<form name="musician" method="post" action="/admin/musicians/new">
+							<fieldset>
+								<label>Name</label>
+								<input type="text" name="name">
 
-    <div class="content">
-        <div>
-            <form name="musician" method="post" action="/admin/musicians/new">
-                <fieldset>
-                  <label>Name</label>
-                  <input type="text" name="name">
+								<select name="band_id">
+									<% bands.forEach(function(band) { %>
+										<option value=<%= band._id %>><%= band.name %>
+									<% }) %>
+								</select>
+							</fieldset>
+							<input type="submit" value="Save">
+					</form>
+			</div>
+	</div>
 
-                  <select name="band_id">
-                    <% bands.forEach(function(band) { %>
-                      <option value=<%= band._id %>><%= band.name %>
-                    <% }) %>
-                  </select>
-                </fieldset>
-                <input type="submit" value="Save">
-            </form>
-        </div>
-    </div>
-
-  </body>
-</html>
+<% include ../partials/footer %>

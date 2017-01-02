@@ -15,7 +15,7 @@ router.get('/', function(req, res, next) {
 
 router.get('/new', function(req, res, next) {
   Band.find({}, function(error, bands) {
-    res.render('musician_form', { title: "new musician", bands: bands} );
+    res.render('musician/musician_form', { title: "New musician", bands: bands} );
   });
 });
 
@@ -26,13 +26,10 @@ router.post('/new', function(req, res, next) {
     band: req.body.band_id
   });
 
-  console.log("band id: ", req.body.band_id);
-
   musician.save(function(err) {
     if (err) {
       throw err;
     }
-    console.log('new musician saved successfully');
     res.redirect('/admin/musicians')
   });
 

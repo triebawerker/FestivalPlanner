@@ -1,61 +1,52 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
+<% include ../partials/head %>
+<% include ../partials/header %>
 
-    <h2>New performance</h2>
+	<div class="content">
+			<div>
+					<form name="performance" method="post" action="/admin/performances/new">
+							<fieldset>
+									<label>Name</label>
+									<input type="text" name="name">
+									<label>from</label>
+									<input type="text" name="from" placeholder="2016-01-01 10:15">
+									<label>to</label>
+								<input type="text" name="to" placeholder="2016-01-01 10:15">
+							</fieldset>
 
-    <div class="content">
-        <div>
-            <form name="performance" method="post" action="/admin/performances/new">
-                <fieldset>
-                    <label>Name</label>
-                    <input type="text" name="name">
-                    <label>from</label>
-                    <input type="text" name="from" placeholder="2016-01-01 10:15">
-                    <label>to</label>
-                  <input type="text" name="to" placeholder="2016-01-01 10:15">
-                </fieldset>
+							<fieldset>
+									<select name=festival_id >
+										<% festivals.forEach(function(festival) { %>
 
-                <fieldset>
-                    <select name=festival_id >
-                      <% festivals.forEach(function(festival) { %>
+											<option value=<%= festival._id %>
 
-                        <option value=<%= festival._id %>
+												><%= festival.name %>
+											</options>
+										<% }) %>
+									</select>
 
-                          ><%= festival.name %>
-                        </options>
-                      <% }) %>
-                    </select>
+									<select name=location_id >
+										<% locations.forEach(function(location) { %>
 
-                    <select name=location_id >
-                      <% locations.forEach(function(location) { %>
+											<option value=<%= location._id %>
 
-                        <option value=<%= location._id %>
+												><%= location.name %>
+											</options>
+										<% }) %>
+									</select>
 
-                          ><%= location.name %>
-                        </options>
-                      <% }) %>
-                    </select>
+									<select name=band_id >
+										<% bands.forEach(function(band) { %>
 
-                    <select name=band_id >
-                      <% bands.forEach(function(band) { %>
+											<option value=<%= band._id %>
 
-                        <option value=<%= band._id %>
+												><%= band.name %>
+											</options>
+										<% }) %>
+									</select>
+							</fieldset>
+									<input type="submit" value="Save">
+					</form>
+			</div>
+	</div>
 
-                          ><%= band.name %>
-                        </options>
-                      <% }) %>
-                    </select>
-                </fieldset>
-                    <input type="submit" value="Save">
-            </form>
-        </div>
-    </div>
-
-  </body>
-</html>
+<% include ../partials/footer %>

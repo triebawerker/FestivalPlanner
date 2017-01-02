@@ -1,13 +1,7 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
+<% include ../partials/head %>
+<% include ../partials/header %>
 
-    <a href="/musicians/new">new</a>
+    <a href="/admin/musicians/new">new</a>
 
     <table>
       <% musicians.forEach(function(musician){ %>
@@ -19,5 +13,5 @@
           </td>
       <% }); %>
     </table>
-  </body>
-</html>
+
+<% include ../partials/footer %>
