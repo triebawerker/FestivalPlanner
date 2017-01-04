@@ -12,11 +12,14 @@
 							</fieldset>
 
 							<fieldset>
+								<label>Description</label>
+								<textarea class="form-control" rows="3"></textarea>
+							</fieldset>
+
+							<fieldset>
 									<select name=festival_id >
 										<% festivals.forEach(function(festival) { %>
-
 											<option value=<%= festival._id %>
-
 												><%= festival.name %>
 											</options>
 										<% }) %>
@@ -42,7 +45,7 @@
 										<% }) %>
 									</select>
 							</fieldset>
-									<input type="submit" value="Save">
+							<input type="submit" value="Save">
 					</form>
 			</div>
 	</div>

@@ -17,7 +17,8 @@ router.get('/new', function(req, res, next) {
 
 router.post('/new', function(req, res, next) {
   var location = new Location({
-            name: req.body.name
+            name: req.body.name,
+            city: req.body.city
             });
   location.save(function(err) {
     if (err) throw err;
@@ -38,6 +39,7 @@ router.get('/edit/:id', function(req, res, next) {
 router.post('/update/:id', function(req, res,next) {
   Location.findById(get_object_id(req.params.id), function(err, location) {
     location.name = req.body.name;
+    location.city = req.body.city;
     location.save(function(err, location) {
       if (err) {
         res.send('unable to save location');

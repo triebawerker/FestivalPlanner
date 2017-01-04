@@ -8,6 +8,12 @@
 								<label>Name</label>
 								<input type="text" name="name">
 
+								<label>Instrument</label>
+								<input type="text" name="instrument">
+
+								<label>Country</label>
+								<input type="text" name="country">
+
 								<select name="band_id">
 									<% bands.forEach(function(band) { %>
 										<option value=<%= band._id %>><%= band.name %>

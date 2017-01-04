@@ -34,12 +34,13 @@ router.get('/new', function(req, res, next) {
 
 router.post('/new', function(req, res, next) {
   var performance = new Performance({
-    name:      req.body.name,
-    from:      req.body.from,
-    to:        req.body.to,
-    festival:  req.body.festival_id,
-    location:  req.body.location_id,
-    band:      req.body.band_id
+    name:        req.body.name,
+    desctiption: req.body.description,
+    from:        req.body.from,
+    to:          req.body.to,
+    festival:    req.body.festival_id,
+    location:    req.body.location_id,
+    band:        req.body.band_id
   });
   performance.save(function(err) {
     if (err) throw err;
@@ -62,12 +63,12 @@ router.get('/edit/:id', function(req, res, next) {
           }
 
           res.render('performance/performance_edit',
-                     { title: "Edit performance",
-                       performance: performance,
-                       festivals: festivals,
-                       locations: locations,
-                       bands: bands
-                     });
+						 { title: "Edit performance",
+							 performance: performance,
+							 festivals: festivals,
+							 locations: locations,
+							 bands: bands
+						 });
         });
       });
     });
@@ -76,12 +77,13 @@ router.get('/edit/:id', function(req, res, next) {
 
 router.post('/update/:id', function(req, res,next) {
   Performance.findById(get_object_id(req.params.id), function(err, performance) {
-    performance.name     = req.body.name;
-    performance.from     = req.body.from;
-    performance.to       = req.body.to;
-    performance.festival = req.body.festival_id;
-    performance.location = req.body.location_id;
-    performance.band     = req.body.band_id;
+    performance.name        = req.body.name;
+    performance.description = req.body.description;
+    performance.from        = req.body.from;
+    performance.to          = req.body.to;
+    performance.festival    = req.body.festival_id;
+    performance.location    = req.body.location_id;
+    performance.band        = req.body.band_id;
     performance.save(function(err, performance) {
       if (err) {
         res.send('unable to save performance');

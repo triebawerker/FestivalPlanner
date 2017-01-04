@@ -22,7 +22,9 @@ router.get('/new', function(req, res, next) {
 router.post('/new', function(req, res, next) {
 
   var musician = new Musician({
-    name: req.body.name,
+    name:       req.body.name,
+    instrument: req.body.instrument,
+    country:    req.body.country,
     band: req.body.band_id
   });
 
@@ -58,8 +60,10 @@ router.get('/edit/:id', function(req, res, next) {
 
 router.post('/update/:id', function(req, res,next) {
     Musician.findById(get_object_id(req.params.id), function(err, musician) {
-      musician.name = req.body.name;
-      musician.band = req.body.band_id;
+      musician.name       = req.body.name;
+      musician.instrument = req.body.instrument;
+      musician.country     = req.body.country;
+      musician.band       = req.body.band_id;
       musician.save(function(err, docs) {
       if (err) {
         res.send('unable to save musician');
