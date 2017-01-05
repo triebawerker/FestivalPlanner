@@ -19,12 +19,18 @@ db.once('open', function() {
   // we're connected!
 });
 
-var routes = require('./routes/index');
-var locations = require('./routes/admin/locations');
-var bands = require('./routes/admin/bands');
-var musicians = require('./routes/admin/musicians');
-var festivals = require('./routes/admin/festivals');
+
+var routes       = require('./routes/index');
+
+/* admin */
+var locations    = require('./routes/admin/locations');
+var bands        = require('./routes/admin/bands');
+var musicians    = require('./routes/admin/musicians');
+var festivals    = require('./routes/admin/festivals');
 var performances = require('./routes/admin/performances');
+
+/* api */
+var schedule          = require('./routes/api/schedule');
 
 var app = express();
 
@@ -82,8 +88,16 @@ app.use('/admin/bands', bands);
 app.use('/admin/musicians', musicians);
 app.use('/admin/festivals', festivals);
 app.use('/admin/performances', performances);
+app.use('/api/schedule', schedule);
 
+app.use(function (req, res, next) {
 
+    // Website you wish to allow to connect
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+
+    // Pass to next layer of middleware
+    next();
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -17,7 +17,8 @@ router.get('/new', function(req, res, next) {
 
 router.post('/new', function(req, res, next) {
   var band = new Band({
-            name: req.body.name
+            name: req.body.name,
+            image: req.body.imageUrl
             });
   band.save(function(err) {
     if (err) throw err;
@@ -40,6 +41,7 @@ router.post('/update/:id', function(req, res,next) {
   Band.findById(get_object_id(req.params.id), function(err, band) {
   console.log("store new name");
     band.name = req.body.name;
+    band.imageUrl = req.body.imageUrl;
     band.save(function(err, band) {
       if (err) {
         res.send('unable to save band');
