@@ -38,6 +38,7 @@ router.post('/new', function(req, res, next) {
     desctiption: req.body.description,
     from:        req.body.from,
     to:          req.body.to,
+    featuring:   req.body.featuring,
     festival:    req.body.festival_id,
     location:    req.body.location_id,
     band:        req.body.band_id
@@ -81,6 +82,7 @@ router.post('/update/:id', function(req, res,next) {
     performance.description = req.body.description;
     performance.from        = req.body.from;
     performance.to          = req.body.to;
+    performance.featuring   = req.body.featuring;
     performance.festival    = req.body.festival_id;
     performance.location    = req.body.location_id;
     performance.band        = req.body.band_id;
@@ -89,6 +91,7 @@ router.post('/update/:id', function(req, res,next) {
         res.send('unable to save performance');
       }
       else {
+      console.log("stored location id: ", performance.location);
         res.redirect('/admin/performances');
       };
     });

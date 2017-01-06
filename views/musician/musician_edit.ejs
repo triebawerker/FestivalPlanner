@@ -18,9 +18,7 @@
 										<% bands.forEach(function(band) { %>
 
 											<option value=<%= band._id %>
-												<% if (musician.band.name == band.name) { %>
-													selected="<%= band.name %>"
-												<% } %>
+												<%= musician.band.equals(band) ? "selected" : "" %>
 												><%= band.name %>
 											</options>
 										<% }) %>

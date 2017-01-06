@@ -6,9 +6,11 @@ var performanceSchema = Schema({
   description: String,
   from:        Date,
   to:          Date,
+  featuring:   String,
   festival:    { type: Schema.Types.ObjectId, ref: 'Festival' },
   location:    { type: Schema.Types.ObjectId, ref: 'Location' },
   band:        { type: Schema.Types.ObjectId, ref: 'Band' }
 });
 
 module.exports = mongoose.model('performance', performanceSchema);
+
