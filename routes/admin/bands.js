@@ -18,7 +18,7 @@ router.get('/new', function(req, res, next) {
 router.post('/new', function(req, res, next) {
   var band = new Band({
             name: req.body.name,
-            image: req.body.imageUrl
+            imageUrl: req.body.imageUrl
             });
   band.save(function(err) {
     if (err) throw err;

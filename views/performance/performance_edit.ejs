@@ -6,9 +6,10 @@
 					<form name="performance" method="post" action="/admin/performances/update/<%= performance.id %>">
 							<fieldset>
 									<label>Name</label>
-									<input type="text" name="name" value="<%= performance.name %>">
-									<input type="text" name="from" value="<%= performance.from %>" placeholder="2016-01-01 10:15">
-									<input type="text" name="to"   value="<%= performance.to   %>" placeholder="2016-01-01 10:15">
+									<input type="text" name="name"      value="<%= performance.name %>">
+									<input type="text" name="from"      value="<%= performance.from %>" placeholder="2016-01-01 10:15">
+									<input type="text" name="to"        value="<%= performance.to   %>" placeholder="2016-01-01 10:15">
+									<input type="text" name="featuring" value="<%= performance.featuring   %>">
 							</fieldset>
 
 							<fieldset>
@@ -20,6 +21,7 @@
 									<select name=festival_id >
 										<% festivals.forEach(function(festival) { %>
 											<option value=<%= festival._id %>
+												<%= performance.festival.equals(festival) ? "selected" : "" %>
 												><%= festival.name %>
 											</options>
 										<% }) %>
@@ -29,9 +31,8 @@
 										<% locations.forEach(function(location) { %>
 
 											<option value=<%= location._id %>
-
-												><%= location.name %>
-											</options>
+												<%= performance.location.equals(location) ? "selected" : "" %>
+											><%= location.name %></options>
 										<% }) %>
 									</select>
 
@@ -39,7 +40,7 @@
 										<% bands.forEach(function(band) { %>
 
 											<option value=<%= band._id %>
-
+												<%= performance.band.equals(band) ? "selected" : "" %>
 												><%= band.name %>
 											</options>
 										<% }) %>
