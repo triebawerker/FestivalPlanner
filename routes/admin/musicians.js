@@ -28,10 +28,11 @@ router.post('/new', function(req, res, next) {
     band: req.body.band_id
   });
 
-  musician.save(function(err) {
+  musician.save(function(err, new_musician) {
     if (err) {
       throw err;
     }
+
     res.redirect('/admin/musicians')
   });
 
@@ -64,11 +65,24 @@ router.post('/update/:id', function(req, res,next) {
       musician.instrument = req.body.instrument;
       musician.country     = req.body.country;
       musician.band       = req.body.band_id;
-      musician.save(function(err, docs) {
+      musician.save(function(err, new_musician) {
       if (err) {
         res.send('unable to save musician');
       }
       else {
+          // update band with musician
+          let band_id = req.body.band_id;
+          console.log("band id ", band_id);
+          console.log("band", get_object_id(band_id));
+          Band.findById(get_object_id(band_id), function(err, band) {
+          	band.musicians.push(new_musician._id);
+            band.save(function(error, band) {
+              if (err) {
+                console.log("unable to save band with new_musician");
+              }
+            });
+          });
+
         res.redirect('/admin/musicians');
       };
     });

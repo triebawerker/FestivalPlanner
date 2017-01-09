@@ -7,6 +7,7 @@
 		<% bands.forEach(function(band){ %>
 			<tr>
 				<td><%= band.name %></td>
+				<td><%= band.description %></td>
 				<td>
 					<a href="/admin/bands/edit/<%= band._id %>">edit</a>
 				</td>

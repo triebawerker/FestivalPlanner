@@ -31,6 +31,7 @@ var performances = require('./routes/admin/performances');
 
 /* api */
 var schedule          = require('./routes/api/schedule');
+var band              = require('./routes/api/band');
 
 var app = express();
 
@@ -64,10 +65,7 @@ app.use(session(sessionOpts));
 app.use(passport.initialize());
 // call passport for admin routes
 app.use(function(req, res, next){
-console.log("any route for admin has been called", req.url);
   if(req.url.match('/admin/*')) {
-  	console.log("it should call the session now");
-  	console.log(req.session);
     passport.session()(req, res, next)
   } else {
 
@@ -89,6 +87,7 @@ app.use('/admin/musicians', musicians);
 app.use('/admin/festivals', festivals);
 app.use('/admin/performances', performances);
 app.use('/api/schedule', schedule);
+app.use('/api/band', band);
 
 app.use(function (req, res, next) {
 
