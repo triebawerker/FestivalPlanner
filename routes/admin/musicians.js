@@ -61,6 +61,8 @@ router.get('/edit/:id', function(req, res, next) {
 
 router.post('/update/:id', function(req, res,next) {
     Musician.findById(get_object_id(req.params.id), function(err, musician) {
+      var current_band_id = get_object_id(musician.band);
+
       musician.name       = req.body.name;
       musician.instrument = req.body.instrument;
       musician.country     = req.body.country;
@@ -70,19 +72,52 @@ router.post('/update/:id', function(req, res,next) {
         res.send('unable to save musician');
       }
       else {
-          // update band with musician
-          let band_id = req.body.band_id;
-          console.log("band id ", band_id);
-          console.log("band", get_object_id(band_id));
-          Band.findById(get_object_id(band_id), function(err, band) {
-          	band.musicians.push(new_musician._id);
-            band.save(function(error, band) {
-              if (err) {
-                console.log("unable to save band with new_musician");
-              }
-            });
-          });
+          // update band with musician if band changed
 
+          let new_band_id = req.body.band_id;
+          let musician_id = req.params.id;
+
+          if (current_band_id !== new_band_id) {
+
+            // remove musician from current band
+            Band.findById(get_object_id(current_band_id), function(err, band) {
+              console.log("current band id: ", current_band_id);
+              console.log("current musicians ", band.musicians);
+              console.log("current band index of ", band.musicians.indexOf(get_object_id(musician_id)));
+              if (band.musicians.indexOf(get_object_id(musician_id)) > -1) {
+                  band.musicians.splice(band.musicians.indexOf(get_object_id(musician_id)), 1);
+                  console.log("updated bands array ", band.musicians);
+                  band.save(function(error, band) {
+                    if(err) {
+                      console.log("unable to save band after removing band");
+                    }
+                    console.log("removed musician from band", current_band_id);
+                  });
+              } else {
+                  console.log("musician not found on current band");
+              }
+
+            });
+
+
+            console.log("new band id replaces current band id", new_band_id);
+            console.log("band", get_object_id(new_band_id));
+
+            // add musician if not yet exists
+            Band.findById(get_object_id(new_band_id), function(err, band) {
+              if (band.musicians.indexOf(new_musician._id) > -1) {
+                  console.log("musician already added");
+              } else {
+                band.musicians.push(new_musician._id);
+                band.save(function(error, band) {
+                  if (err) {
+                    console.log("unable to save band with new_musician");
+                  }
+                });
+              }
+
+            });
+          }
         res.redirect('/admin/musicians');
       };
     });
