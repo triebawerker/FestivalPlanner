@@ -5,7 +5,9 @@ var get_object_id = require('../../helper');
 var Band = require('../../models/band');
 
 router.get('/', function(req, res, next) {
-  Band.find({}, function (err, docs) {
+  Band.find({})
+  .populate('musicians')
+  .exec(function (err, docs) {
     res.render('band/bands', { title: 'Bands', bands: docs});
   });
 });

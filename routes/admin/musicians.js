@@ -81,32 +81,21 @@ router.post('/update/:id', function(req, res,next) {
 
             // remove musician from current band
             Band.findById(get_object_id(current_band_id), function(err, band) {
-              console.log("current band id: ", current_band_id);
-              console.log("current musicians ", band.musicians);
-              console.log("current band index of ", band.musicians.indexOf(get_object_id(musician_id)));
               if (band.musicians.indexOf(get_object_id(musician_id)) > -1) {
                   band.musicians.splice(band.musicians.indexOf(get_object_id(musician_id)), 1);
-                  console.log("updated bands array ", band.musicians);
                   band.save(function(error, band) {
                     if(err) {
                       console.log("unable to save band after removing band");
                     }
-                    console.log("removed musician from band", current_band_id);
                   });
               } else {
                   console.log("musician not found on current band");
               }
-
             });
-
-
-            console.log("new band id replaces current band id", new_band_id);
-            console.log("band", get_object_id(new_band_id));
 
             // add musician if not yet exists
             Band.findById(get_object_id(new_band_id), function(err, band) {
               if (band.musicians.indexOf(new_musician._id) > -1) {
-                  console.log("musician already added");
               } else {
                 band.musicians.push(new_musician._id);
                 band.save(function(error, band) {
