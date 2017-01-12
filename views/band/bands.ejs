@@ -6,11 +6,26 @@
 	<table>
 		<% bands.forEach(function(band){ %>
 			<tr>
-				<td><%= band.name %></td>
+				<td><h3><%= band.name %></h3></td>
 				<td>
 					<a href="/admin/bands/edit/<%= band._id %>">edit</a>
 				</td>
+			</tr>
+			<% band.musicians.forEach(function(musician) { %>
+				<tr>
+					<td colspan="2">
+						<%= musician.instrument %>:
+						<%= musician.name %>
+						(<%= musician.country %>)
+					</td>
+				</tr>
+			<% }) %>
+			</tr>
+			<tr>
+				<td colspan="2"  class="band-description"><%= band.description %></td>
+			</tr>
 		<% }); %>
 	</table>
+
 
 <% include ../partials/footer %>
