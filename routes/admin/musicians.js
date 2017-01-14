@@ -7,7 +7,7 @@ var Band = require('../../models/band');
 
 router.get('/', function(req, res, next) {
   Musician.find({})
-    .populate('band')
+    .populate('bands')
     .exec(function (err, docs) {
     res.render('musician/musicians', { title: 'Musicians', musicians: docs});
   });
@@ -61,56 +61,82 @@ router.get('/edit/:id', function(req, res, next) {
 
 router.post('/update/:id', function(req, res,next) {
     Musician.findById(get_object_id(req.params.id), function(err, musician) {
-      var current_band_id = get_object_id(musician.band);
+      let current_bands = musician.bands;
 
       musician.name       = req.body.name;
       musician.instrument = req.body.instrument;
-      musician.country     = req.body.country;
-      musician.band       = req.body.band_id;
+      musician.country    = req.body.country;
+      musician.bands      = req.body.band_id;
       musician.save(function(err, new_musician) {
       if (err) {
         res.send('unable to save musician');
       }
-      else {
-          // update band with musician if band changed
 
-          let new_band_id = req.body.band_id;
-          let musician_id = req.params.id;
+      let request_bands = [];
+      if (req.body.band_id.constructor === Array) {
+        for (let j in req.body.band_id) {
+          request_bands.push(req.body.band_id[j]);
+        }
 
-          if (current_band_id !== new_band_id) {
+      } else {
+        request_bands.push(req.body.band_id);
+      }
 
-            // remove musician from current band
-            Band.findById(get_object_id(current_band_id), function(err, band) {
-              if (band.musicians.indexOf(get_object_id(musician_id)) > -1) {
-                  band.musicians.splice(band.musicians.indexOf(get_object_id(musician_id)), 1);
-                  band.save(function(error, band) {
-                    if(err) {
-                      console.log("unable to save band after removing band");
-                    }
-                  });
-              } else {
-                  console.log("musician not found on current band");
-              }
-            });
+      // get old an new bands
+      let new_bands = request_bands;
+      let old_bands = [];
+      for (let band in current_bands) {
+        if (request_bands.indexOf(band) > -1) {
+          old_bands.push(request_bands[band]);
+          new_bands.splice(band, 1);
+        }
+      }
 
-            // add musician if not yet exists
-            Band.findById(get_object_id(new_band_id), function(err, band) {
-              if (band.musicians.indexOf(new_musician._id) > -1) {
-              } else {
-                band.musicians.push(new_musician._id);
-                band.save(function(error, band) {
-                  if (err) {
-                    console.log("unable to save band with new_musician");
-                  }
-                });
-              }
+      updateBand(old_bands, new_bands, musician._id);
 
-            });
-          }
-        res.redirect('/admin/musicians');
-      };
+      res.redirect('/admin/musicians');
     });
   });
 });
+
+updateBand = function(old_bands, new_bands, musician_id) {
+
+  // remove musician from current band
+  if (old_bands.length != undefined) {
+    for (let current_band_id in old_bands) {
+      Band.findById(get_object_id(old_bands[current_band_id]), function(err, band) {
+        if (band.musicians.indexOf(get_object_id(musician_id)) > -1) {
+            band.musicians.splice(band.musicians.indexOf(get_object_id(musician_id)), 1);
+            band.save(function(error, band) {
+              if(err) {
+                console.log("unable to save band after removing band");
+              }
+            });
+        } else {
+            console.log("musician not found on current band");
+        }
+      });
+    }
+  }
+
+
+  // add musician if not yet exists
+  if (new_bands == undefined) return;
+
+  for (let new_band_id in new_bands) {
+    Band.findById(get_object_id(new_bands[new_band_id]), function(err, band) {
+      if (band.musicians.indexOf(musician_id) > -1) {
+      } else {
+        band.musicians.push(musician_id);
+        band.save(function(error, band) {
+          if (err) {
+            console.log("unable to save band with new_musician");
+          }
+        });
+      }
+
+    });
+  }
+}
 
 module.exports = router;

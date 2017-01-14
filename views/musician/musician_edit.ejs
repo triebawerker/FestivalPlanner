@@ -14,11 +14,10 @@
 									<label>Country</label>
 									<input type="text" name="country" value="<%= musician.country %>"">
 
-									<select name=band_id >
+									<select name=band_id multiple>
 										<% bands.forEach(function(band) { %>
-
 											<option value=<%= band._id %>
-												<%= musician.band.equals(band) ? "selected" : "" %>
+												<%= (musician.bands.indexOf(band._id) > -1) ? "selected" : "" %>
 												><%= band.name %>
 											</options>
 										<% }) %>

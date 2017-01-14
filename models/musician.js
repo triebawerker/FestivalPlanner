@@ -5,7 +5,8 @@ var musicianSchema = Schema({
 		name: String,
 		instrument: String,
 		country: String,
-    band: { type: Schema.Types.ObjectId, ref: 'Band' }
+    band: { type: Schema.Types.ObjectId, ref: 'Band' },
+		bands: [{ type: Schema.Types.ObjectId, ref: 'Band' }]
 	});
 
 module.exports = mongoose.model('Musician', musicianSchema);

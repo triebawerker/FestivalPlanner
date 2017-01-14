@@ -14,7 +14,7 @@
 								<label>Country</label>
 								<input type="text" name="country">
 
-								<select name="band_id">
+								<select name="band_id[]" multiple>
 									<% bands.forEach(function(band) { %>
 										<option value=<%= band._id %>><%= band.name %>
 									<% }) %>
