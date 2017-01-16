@@ -3,15 +3,25 @@
 
 	<a href="/admin/locations/new">new</a>
 
-	<table>
+
 		<% locations.forEach(function(location){ %>
-			<tr>
-				<td><%= location.name %></td>
-				<td><%= location.city %></td>
-				<td>
-					<a href="locations/edit/<%= location._id %>">edit</a>
-				</td>
+
+			<h1><%= location.name %></h1>
+			<ul>
+				<li>
+					<span><%= location.zip %></span> <span><%= location.city %></span>
+				</li>
+				<li>
+					<span><%= location.street %></span>
+				</li>
+				<li><%= location.phone %></li>
+				<li><%= location.fax %></li>
+				<li><%= location.web %></li>
+				<li><%= location.email %></li>
+				<li><%= location.imageUrl %></li>
+			</ul>
+			<a href="locations/edit/<%= location._id %>">edit</a>
 		<% }); %>
-	</table>
+
 
 <% include ../partials/footer %>

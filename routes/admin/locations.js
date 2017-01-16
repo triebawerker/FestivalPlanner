@@ -18,7 +18,14 @@ router.get('/new', function(req, res, next) {
 router.post('/new', function(req, res, next) {
   var location = new Location({
             name: req.body.name,
-            city: req.body.city
+            city: req.body.city,
+            street: req.body.street,
+            zip: req.body.zip,
+            phone: req.body.phone,
+            fax: req.body.fax,
+            web: req.body.web,
+            email: req.body.email,
+            imageUrl: req.body.imageUrl
             });
   location.save(function(err) {
     if (err) throw err;
@@ -40,6 +47,13 @@ router.post('/update/:id', function(req, res,next) {
   Location.findById(get_object_id(req.params.id), function(err, location) {
     location.name = req.body.name;
     location.city = req.body.city;
+    location.steet = req.body.street;
+    location.zip = req.body.zip
+    location.phone = req.body.phone;
+    location.fax = req.body.fax;
+    location.web = req.body.web;
+    location.email = req.body.email;
+    location.imageUrl = req.body.imageUrl;
     location.save(function(err, location) {
       if (err) {
         res.send('unable to save location');

@@ -32,6 +32,7 @@ var performances = require('./routes/admin/performances');
 /* api */
 var schedule          = require('./routes/api/schedule');
 var band              = require('./routes/api/band');
+var location              = require('./routes/api/location');
 
 var app = express();
 
@@ -88,6 +89,7 @@ app.use('/admin/festivals', festivals);
 app.use('/admin/performances', performances);
 app.use('/api/schedule', schedule);
 app.use('/api/band', band);
+app.use('/api/location', location);
 
 app.use(function (req, res, next) {
 

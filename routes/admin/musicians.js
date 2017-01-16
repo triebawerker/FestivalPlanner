@@ -119,7 +119,6 @@ updateBand = function(old_bands, new_bands, musician_id) {
     }
   }
 
-
   // add musician if not yet exists
   if (new_bands == undefined) return;
 
