@@ -1,3 +1,7 @@
+// make momentjs available
+var moment = require('moment');
+var shortDateFormat = "ddd H:mm";
+
 var express = require('express');
 var session = require('express-session');
 var path = require('path');
@@ -32,9 +36,12 @@ var performances = require('./routes/admin/performances');
 /* api */
 var schedule          = require('./routes/api/schedule');
 var band              = require('./routes/api/band');
-var location              = require('./routes/api/location');
+var location          = require('./routes/api/location');
 
 var app = express();
+// make moment available as a variable in every EJS page
+app.locals.moment = moment;
+app.locals.shortDateFormat = shortDateFormat;
 
 app.listen(3000, function() {
     console.log('listening on 3000')
