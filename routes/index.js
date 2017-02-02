@@ -18,10 +18,9 @@ router.get('/', function(req, res, next) {
   res.render('index', {title: "Welcome"});
 });
 
-router.get('/register', function(req, res) {
-		console.log("register form");
-    res.render('account/register', {title: "Sign up"});
-});
+// router.get('/register', function(req, res) {
+//     res.render('account/register', {title: "Sign up"});
+// });
 
 router.post('/register', function(req, res) {
 		console.log("creating new account");
