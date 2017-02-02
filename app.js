@@ -14,7 +14,8 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 const MongoStore = require('connect-mongo')(session);
 
-mongoose.connect('localhost:27017/jazzfest')
+//mongoose.connect('localhost:27017/jazzfest')
+mongoose.connect('mongodb://admin:1a5b55d299304ba44ad64056c7ef17c4@ds135029.mlab.com:35029/festivalplanner');
 
 var db = mongoose.connection;
 
