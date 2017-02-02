@@ -6,7 +6,7 @@ var Band = require('../../models/band');
 
 router.get('/:id', function(req, res, next) {
 	Band.findById(get_object_id(req.params.id))
-		.populate ('musician')
+		.populate ('musicians')
 		.exec(function(error, band) {
 
 		if (error) {
