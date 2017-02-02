@@ -44,7 +44,7 @@ var app = express();
 app.locals.moment = moment;
 app.locals.shortDateFormat = shortDateFormat;
 
-app.listen(3000, function() {
+app.listen(process.env.PORT || 3000, function() {
     console.log('listening on 3000')
 });
 
