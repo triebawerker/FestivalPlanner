@@ -41,7 +41,8 @@ router.post('/new', function(req, res, next) {
     featuring:   req.body.featuring,
     festival:    req.body.festival_id,
     location:    req.body.location_id,
-    band:        req.body.band_id
+    band:        req.body.band_id,
+    description: req.body.description
   });
   performance.save(function(err) {
     if (err) throw err;
@@ -86,12 +87,14 @@ router.post('/update/:id', function(req, res,next) {
     performance.festival    = req.body.festival_id;
     performance.location    = req.body.location_id;
     performance.band        = req.body.band_id;
+    performance.description = req.body.description;
     performance.save(function(err, performance) {
       if (err) {
         res.send('unable to save performance');
       }
       else {
-      console.log("stored location id: ", performance.location);
+      console.log("stored performance: ", performance);
+      console.log("performance req", req.body);
         res.redirect('/admin/performances');
       };
     });

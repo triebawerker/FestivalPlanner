@@ -10,9 +10,9 @@
 				<td><%= performance.band.name %> play</td>
 				<td>at <%= performance.festival.name %></td>
 				<td>in <%= performance.location.name %></td>
-				<td>from <%= performance.from %></td>
-				<td>to <%= performance.to %></td>
-
+				<td>from <%= moment(performance.from).format(shortDateFormat) %></td>
+				<td>to <%= moment(performance.to).format(shortDateFormat) %></td>
+				<td><%= performance.description %></td>
 				<td>
 					<a href="performances/edit/<%= performance._id %>">edit</a>
 				</td>

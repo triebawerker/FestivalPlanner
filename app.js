@@ -1,3 +1,7 @@
+// make momentjs available
+var moment = require('moment');
+var shortDateFormat = "ddd H:mm";
+
 var express = require('express');
 var session = require('express-session');
 var path = require('path');
@@ -10,7 +14,8 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 const MongoStore = require('connect-mongo')(session);
 
-mongoose.connect('localhost:27017/jazzfest')
+//mongoose.connect('localhost:27017/jazzfest')
+mongoose.connect('mongodb://admin:1a5b55d299304ba44ad64056c7ef17c4@ds135029.mlab.com:35029/festivalplanner');
 
 var db = mongoose.connection;
 
@@ -32,9 +37,12 @@ var performances = require('./routes/admin/performances');
 /* api */
 var schedule          = require('./routes/api/schedule');
 var band              = require('./routes/api/band');
-var location              = require('./routes/api/location');
+var location          = require('./routes/api/location');
 
 var app = express();
+// make moment available as a variable in every EJS page
+app.locals.moment = moment;
+app.locals.shortDateFormat = shortDateFormat;
 
 app.listen(3000, function() {
     console.log('listening on 3000')
