@@ -5,7 +5,7 @@ exports.config = function() {
   if(env == "development") {
     host='http://localhost:4200';
   } else {
-    host= 'https://music-festival-planner.herokuapp.com'
+    host= 'http://46.101.225.110'
   }
 console.log("app env set to", process.env.NODE_ENV);
   return host;
