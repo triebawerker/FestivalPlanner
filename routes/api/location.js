@@ -7,6 +7,9 @@ var Location = require('../../models/location');
 var common = require('../../common');
 var config = common.config();
 
+console.log("config in location", common.config());
+console.log('env in location', process.env.NODE_ENV);
+
 router.get('/:id', function(req, res, next) {
 	Location.findById(get_object_id(req.params.id))
 		.exec(function(error, band) {
