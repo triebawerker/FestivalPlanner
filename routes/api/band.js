@@ -5,8 +5,8 @@ var get_object_id = require('../../helper');
 var common = require('../../common');
 var config = common.config();
 
-console.log("config in location", common.config());
-console.log('env in location', process.env.NODE_ENV);
+console.log("config in band", common.config());
+console.log('env in band', process.env.NODE_ENV);
 
 var Band = require('../../models/band');
 
