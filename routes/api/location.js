@@ -4,6 +4,9 @@ var get_object_id = require('../../helper');
 
 var Location = require('../../models/location');
 
+var common = require('../../common');
+var config = common.config();
+
 router.get('/:id', function(req, res, next) {
 	Location.findById(get_object_id(req.params.id))
 		.exec(function(error, band) {
@@ -11,7 +14,9 @@ router.get('/:id', function(req, res, next) {
 		if (error) {
 			console.log("Could net retrieve location for id: ", req.params.id);
 		}
-		res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3001');
+
+	  res.setHeader('Access-Control-Allow-Origin', config);
+
   	res.json(band);
   	console.log('location ', band);
 	});

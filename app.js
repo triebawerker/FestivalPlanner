@@ -99,15 +99,6 @@ app.use('/api/schedule', schedule);
 app.use('/api/band', band);
 app.use('/api/location', location);
 
-app.use(function (req, res, next) {
-
-    // Website you wish to allow to connect
-    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
-
-    // Pass to next layer of middleware
-    next();
-});
-
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
