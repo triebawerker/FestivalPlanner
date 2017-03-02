@@ -1,11 +1,12 @@
 var express = require('express');
+var common = require('../../common');
+var config = common.config();
+
 var router = express.Router();
+
 var get_object_id = require('../../helper');
 
 var Location = require('../../models/location');
-
-var common = require('../../common');
-var config = common.config();
 
 console.log("config in location", common.config());
 console.log('env in location', process.env.NODE_ENV);

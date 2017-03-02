@@ -1,9 +1,9 @@
 var express = require('express');
-var router = express.Router();
-var get_object_id = require('../../helper');
-
 var common = require('../../common');
 var config = common.config();
+
+var router = express.Router();
+var get_object_id = require('../../helper');
 
 console.log("config in band", common.config());
 console.log('env in band', process.env.NODE_ENV);
