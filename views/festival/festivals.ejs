@@ -7,6 +7,7 @@
 		<% festivals.forEach(function(festival){ %>
 			<tr>
 				<td><%= festival.name %></td>
+				<td><%= festival.year %></td>
 				<td>
 					<a href="/admin/festivals/edit/<%= festival._id %>">edit</a>
 				</td>
