@@ -5,9 +5,6 @@ var config = common.config();
 var router = express.Router();
 var get_object_id = require('../../helper');
 
-console.log("config in band", common.config());
-console.log('env in band', process.env.NODE_ENV);
-
 var Band = require('../../models/band');
 
 router.get('/:id', function(req, res, next) {https://music-festival-planner.herokuapp.com
