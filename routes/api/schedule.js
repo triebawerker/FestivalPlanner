@@ -7,17 +7,17 @@ var get_object_id = require('../../helper');
 
 var Performance = require('../../models/performance');
 
-router.get('/', function(req, res, next) {
-
-	Performance.find({})
+router.get('/:id', function(req, res, next) {
+	Performance.find({
+		festival: get_object_id(req.params.id)
+	})
 	.populate('band')
 	.populate('location')
-	.exec(function(error, performance) {
+	.exec(function(error, festival) {
 
   res.setHeader('Access-Control-Allow-Origin', config);
-
-
-		res.json(performance);
+	res.json(festival);
+		console.log('performance', festival);
 	});
 
 });

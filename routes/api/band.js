@@ -7,7 +7,7 @@ var get_object_id = require('../../helper');
 
 var Band = require('../../models/band');
 
-router.get('/:id', function(req, res, next) {https://music-festival-planner.herokuapp.com
+router.get('/:id', function(req, res, next) {
 	Band.findById(get_object_id(req.params.id))
 		.populate ('musicians')
 		.exec(function(error, band) {
