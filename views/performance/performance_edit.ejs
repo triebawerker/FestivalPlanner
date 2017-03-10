@@ -25,7 +25,7 @@
 										<% festivals.forEach(function(festival) { %>
 											<option value=<%= festival._id %>
 												<%= performance.festival.equals(festival) ? "selected" : "" %>
-												><%= festival.name %>
+												><%= festival.name %> <%= festival.year %>
 											</options>
 										<% }) %>
 									</select>
