@@ -11,6 +11,7 @@ router.get('/:id', function(req, res, next) {
 	Performance.find({
 		festival: get_object_id(req.params.id)
 	})
+	.sort({from: 'desc'})
 	.populate('band')
 	.populate('location')
 	.exec(function(error, festival) {
