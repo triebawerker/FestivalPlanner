@@ -19,7 +19,7 @@ var env=(process.env.NODE_ENV || "development")
 if(env === "production") {
   mongoose.connect('mongodb://admin:1a5b55d299304ba44ad64056c7ef17c4@ds135029.mlab.com:35029/festivalplanner');
 } else{
-  mongoose.connect('localhost:27017/jazzfest')
+  mongoose.connect('localhost:27017/festivalplanner')
 }
 
 var db = mongoose.connection;
