@@ -25,7 +25,7 @@ router.post('/new', function(req, res, next) {
     name:       req.body.name,
     instrument: req.body.instrument,
     country:    req.body.country,
-    band: req.body.band_id
+    bands: req.body.band_id
   });
 
   musician.save(function(err, new_musician) {
