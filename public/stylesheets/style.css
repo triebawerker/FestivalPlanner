@@ -18,3 +18,7 @@ input {
 textarea {
   display: block;
 }
+
+th {
+  text-align: left;
+}
