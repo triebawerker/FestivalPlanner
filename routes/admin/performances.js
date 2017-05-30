@@ -6,6 +6,8 @@ var Performance = require('../../models/performance');
 var Festival = require('../../models/festival');
 var Location = require('../../models/location');
 var Band = require('../../models/band');
+var moment = require('moment');
+var moment_timezone = require('moment-timezone');
 
 router.get('/', function(req, res, next) {
   Performance.find({})
@@ -33,11 +35,21 @@ router.get('/new', function(req, res, next) {
 });
 
 router.post('/new', function(req, res, next) {
+  var from = moment().tz('Europe/Berlin').format();
+  if (req.body.from) {
+    from = moment(req.body.from).tz('Europe/Berlin').format();
+  }
+  var to = moment().tz('Europe/Berlin').format();
+  if (req.body.to)
+  var to = moment(req.body.to).tz('Europe/Berlin').format();
+
   var performance = new Performance({
+
+
     name:        req.body.name,
     desctiption: req.body.description,
-    from:        req.body.from,
-    to:          req.body.to,
+    from:        from,
+    to:          to,
     featuring:   req.body.featuring,
     festival:    req.body.festival_id,
     location:    req.body.location_id,
@@ -81,8 +93,8 @@ router.post('/update/:id', function(req, res,next) {
   Performance.findById(get_object_id(req.params.id), function(err, performance) {
     performance.name        = req.body.name;
     performance.description = req.body.description;
-    performance.from        = req.body.from;
-    performance.to          = req.body.to;
+    performance.from        = moment(req.body.from).tz('Europe/Berlin').format();
+    performance.to          = moment(req.body.to).tz('Europe/Berlin').format();
     performance.featuring   = req.body.featuring;
     performance.festival    = req.body.festival_id;
     performance.location    = req.body.location_id;
@@ -93,8 +105,8 @@ router.post('/update/:id', function(req, res,next) {
         res.send('unable to save performance');
       }
       else {
-      console.log("stored performance: ", performance);
-      console.log("performance req", req.body);
+      // console.log("stored performance: ", performance);
+      // console.log("performance req", req.body);
         res.redirect('/admin/performances');
       };
     });
