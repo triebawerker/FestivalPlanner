@@ -5,12 +5,13 @@
 			<div>
 					<form name="performance" method="post" action="/admin/performances/update/<%= performance.id %>">
 							<fieldset>
+								<%= moment(performance.from).format('yyyy-MM-ddThh:mm') %>
 									<label>Name</label>
 									<input type="text" name="name"      value="<%= performance.name %>">
 									<label>from</label>
-									<input id="datetime" type="datetime-local" name="from"      value="<%= performance.from %>" placeholder="2016-01-01 10:15">
+									<input type="datetime-local" name="from" value="<%= moment(performance.from).format('YYYY-MM-DDTHH:mm') %>">
 									<label>to</label>
-									<input id="datetime" type="datetime-local" name="to"        value="<%= performance.to %>" placeholder="2016-01-01 10:15">
+									<input type="datetime-local" name="to" value="<%= moment(performance.to).format('YYYY-MM-DDTHH:mm') %>">
 									<label>featuring</label>
 									<input type="text" name="featuring" value="<%= performance.featuring %>">
 							</fieldset>
