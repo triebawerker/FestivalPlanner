@@ -8,9 +8,9 @@
 									<label>Name</label>
 									<input type="text" name="name"      value="<%= performance.name %>">
 									<label>from</label>
-									<input type="datetime-local" name="from" value="<%= moment(performance.from).format('YYYY-MM-DDTHH:mm') %>">
+									<input type="datetime-local" name="from" value="<%= moment(performance.from).format('YYYY-MM-DDTHH:mm:ss.SSS') %>">
 									<label>to</label>
-									<input type="datetime-local" name="to" value="<%= moment(performance.to).format('YYYY-MM-DDTHH:mm') %>">
+									<input type="datetime-local" name="to" value="<%= moment(performance.to).format('YYYY-MM-DDTHH:mm:ss.SSS') %>">
 									<label>featuring</label>
 									<input type="text" name="featuring" value="<%= performance.featuring %>">
 							</fieldset>

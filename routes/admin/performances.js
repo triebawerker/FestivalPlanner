@@ -35,13 +35,13 @@ router.get('/new', function(req, res, next) {
 });
 
 router.post('/new', function(req, res, next) {
-  var from = moment().tz('Europe/Berlin').format();
+  var from = moment().tz('UTC').format();
   if (req.body.from) {
-    from = moment(req.body.from).tz('Europe/Berlin').format();
+    from = moment(req.body.from).tz('UTC').format();
   }
-  var to = moment().tz('Europe/Berlin').format();
+  var to = moment().tz('UTC').format();
   if (req.body.to)
-  var to = moment(req.body.to).tz('Europe/Berlin').format();
+  var to = moment(req.body.to).tz('UTC').format();
 
   var performance = new Performance({
 
