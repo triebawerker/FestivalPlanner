@@ -19,7 +19,7 @@ var env=(process.env.NODE_ENV || "development")
 if(env === "staging") {
   mongoose.connect('mongodb://admin:1a5b55d299304ba44ad64056c7ef17c4@ds135029.mlab.com:35029/festivalplanner');
 }else if (env==="production") {
-  mongoose.connect('mongodb://admin:asdfasf@foobar/festivalplanner');
+  mongoose.connect('mongodb://localhost/festivalplanner');
 }else{
   mongoose.connect('localhost:27017/festivalplanner')
 }
