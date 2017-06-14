@@ -31,7 +31,6 @@ db.once('open', function() {
   // we're connected!
 });
 
-
 var routes       = require('./routes/index');
 
 /* admin */
