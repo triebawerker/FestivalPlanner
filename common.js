@@ -3,7 +3,7 @@ exports.config = function() {
   var host;
   if(env == "development") {
     host=['http://localhost:4200'];
-  } else if (env == "production") {
+  } else {
     host=['http://uckermark-jazzfest.de']
   }
   return host;
