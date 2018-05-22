@@ -13,6 +13,9 @@ router.get('/', function(req, res, next) {
     .populate('location')
     .populate('band')
     .exec(function (err, docs) {
+      if (err) {
+        res.send('can not fetch performances');
+      }
     res.render('performance/performances', { title: 'Performances', performances: docs});
   });
 });
@@ -33,6 +36,8 @@ router.get('/new', function(req, res, next) {
 });
 
 router.post('/new', function(req, res, next) {
+  var from = new Date(Date.UTC(req.body.from));
+  console.log('from: ', from);
   var performance = new Performance({
     name:        req.body.name,
     desctiption: req.body.description,
@@ -78,10 +83,22 @@ router.get('/edit/:id', function(req, res, next) {
 });
 
 router.post('/update/:id', function(req, res,next) {
+
   Performance.findById(get_object_id(req.params.id), function(err, performance) {
+
+    console.log('from mongo: ', performance.from);
+
+    console.log('from UI', req.body.from);
+
+    var date = new Date(req.body.from);
+    console.log('new date: ', date);
+
+    var utc_date = date.toUTCString();
+    console.log('new date UTC: ', utc_date);
+
     performance.name        = req.body.name;
     performance.description = req.body.description;
-    performance.from        = req.body.from;
+    performance.from        = utc_date;
     performance.to          = req.body.to;
     performance.featuring   = req.body.featuring;
     performance.festival    = req.body.festival_id;
@@ -93,8 +110,9 @@ router.post('/update/:id', function(req, res,next) {
         res.send('unable to save performance');
       }
       else {
-      console.log("stored performance: ", performance);
-      console.log("performance req", req.body);
+      // console.log("stored performance: ", performance);
+      // console.log("performance req", req.body);
+
         res.redirect('/admin/performances');
       };
     });

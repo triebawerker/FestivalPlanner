@@ -14,12 +14,13 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 const MongoStore = require('connect-mongo')(session);
 
-console.log('env', process.env.NODE_ENV);
+console.log('environmen is ', process.env.NODE_ENV);
 var env=(process.env.NODE_ENV || "development")
 if(env === "production") {
-  mongoose.connect('mongodb://admin:1a5b55d299304ba44ad64056c7ef17c4@ds135029.mlab.com:35029/festivalplanner');
+  //mongoose.connect('mongodb://admin:1a5b55d299304ba44ad64056c7ef17c4@ds135029.mlab.com:35029/festivalplanner');
+  mongoose.connect('localhost:27017/festivalplanner');
 } else{
-  mongoose.connect('localhost:27017/jazzfest')
+  mongoose.connect('mongodb://127.0.0.1:27017/festivalplanner');
 }
 
 var db = mongoose.connection;
@@ -110,6 +111,12 @@ app.use(function(req, res, next) {
   err.status = 404;
   next(err);
 });
+
+// app.all('*', function(req, res, next) {
+//   res.header("Access-Control-Allow-Origin", "*");
+//   res.header("Access-Control-Allow-Headers", "X-Requested-With");
+//   next();
+// });
 
 // error handlers
 

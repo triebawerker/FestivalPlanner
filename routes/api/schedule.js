@@ -16,6 +16,10 @@ router.get('/:id', function(req, res, next) {
 	.populate('location')
 	.exec(function(error, festival) {
 
+		if (error) {
+			console.log("Could net retrieve schedule  for id: ", req.params.id);
+		}
+
   res.setHeader('Access-Control-Allow-Origin', config);
 	res.json(festival);
 		console.log('performance', festival);
