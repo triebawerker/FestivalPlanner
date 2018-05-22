@@ -36,8 +36,13 @@ router.get('/new', function(req, res, next) {
 });
 
 router.post('/new', function(req, res, next) {
-  var from = new Date(Date.UTC(req.body.from));
-  console.log('from: ', from);
+
+  var from = new Date(req.body.from);
+  var utc_from = date.toUTCString();
+
+  var to = new Date(req.body.to);
+  var utc_to = to.toUTCString();
+
   var performance = new Performance({
     name:        req.body.name,
     desctiption: req.body.description,
@@ -90,11 +95,14 @@ router.post('/update/:id', function(req, res,next) {
 
     console.log('from UI', req.body.from);
 
-    var date = new Date(req.body.from);
+    var from = new Date(req.body.from);
     console.log('new date: ', date);
 
-    var utc_date = date.toUTCString();
+    var utc_from = date.toUTCString();
     console.log('new date UTC: ', utc_date);
+
+    var to = new Date(req.body.to);
+    var utc_to = to.toUTCString();
 
     performance.name        = req.body.name;
     performance.description = req.body.description;
