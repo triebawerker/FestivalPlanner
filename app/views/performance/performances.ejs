@@ -4,19 +4,28 @@
 	<a href="/admin/performances/new">new</a>
 
 	<table>
-		<% performances.forEach(function(performance){ %>
+		<thead>
+		<tr>
+			<th>performance</th>
+			<th>festival</th>
+			<th>location</th>
+			<th>from</th>
+			<th>to</th>
+		</tr>
+		</thead>
+		<tbody>
+			<% performances.forEach(function(performance){ %>
 			<tr>
-				<td><%= performance.name %>:</td>
-				<td><%= performance.band.name %></td>
-				<td>at <%= performance.festival.name %></td>
-				<td>in <%= performance.location.name %></td>
-				<td>from <%= moment(performance.from).format('dddd, d MMMM YYYY hh:mm') %></td>
-				<td>to <%= moment(performance.to).format(shortDateFormat) %></td>
-				<td><%= performance.description %></td>
+				<td><%= performance.name %></td>
+				<td><%= performance.festival.name %></td>
+				<td><%= performance.location.name %></td>
+				<td><%= moment(performance.from).format('dd, DD.MM YYYY HH:mm') %></td>
+				<td><%= moment(performance.to).format('dd, DD.MM YYYY HH:mm') %></td>
 				<td>
 					<a href="performances/edit/<%= performance._id %>">edit</a>
 				</td>
 		<% }); %>
+		</tbody>
 	</table>
 
 <% include ../partials/footer %>

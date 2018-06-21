@@ -6,6 +6,8 @@ var Performance = require('../../models/performance');
 var Festival = require('../../models/festival');
 var Location = require('../../models/location');
 var Band = require('../../models/band');
+var moment = require('moment');
+var moment_timezone = require('moment-timezone');
 
 router.get('/', function(req, res, next) {
   Performance.find({})
@@ -44,10 +46,12 @@ router.post('/new', function(req, res, next) {
   var utc_to = to.toUTCString();
 
   var performance = new Performance({
+
+
     name:        req.body.name,
     desctiption: req.body.description,
-    from:        req.body.from,
-    to:          req.body.to,
+    from:        from,
+    to:          to,
     featuring:   req.body.featuring,
     festival:    req.body.festival_id,
     location:    req.body.location_id,
@@ -106,8 +110,13 @@ router.post('/update/:id', function(req, res,next) {
 
     performance.name        = req.body.name;
     performance.description = req.body.description;
+<<<<<<< HEAD:app/routes/admin/performances.js
     performance.from        = utc_date;
     performance.to          = req.body.to;
+=======
+    performance.from        = moment(req.body.from).tz('Europe/Berlin').format();
+    performance.to          = moment(req.body.to).tz('Europe/Berlin').format();
+>>>>>>> b0c4a6d22ea9183050dd7b85bfc1f5c17ceba885:routes/admin/performances.js
     performance.featuring   = req.body.featuring;
     performance.festival    = req.body.festival_id;
     performance.location    = req.body.location_id;
@@ -120,7 +129,10 @@ router.post('/update/:id', function(req, res,next) {
       else {
       // console.log("stored performance: ", performance);
       // console.log("performance req", req.body);
+<<<<<<< HEAD:app/routes/admin/performances.js
 
+=======
+>>>>>>> b0c4a6d22ea9183050dd7b85bfc1f5c17ceba885:routes/admin/performances.js
         res.redirect('/admin/performances');
       };
     });

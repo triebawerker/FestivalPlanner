@@ -30,7 +30,6 @@ db.once('openUri()', function() {
   // we're connected!
 });
 
-
 var routes       = require('./routes/index');
 
 /* admin */
