@@ -14,19 +14,19 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 const MongoStore = require('connect-mongo')(session);
 
-console.log('environmen is ', process.env.NODE_ENV);
+console.log('environment is ', process.env.NODE_ENV);
 var env=(process.env.NODE_ENV || "development")
 if(env === "production") {
   //mongoose.connect('mongodb://admin:1a5b55d299304ba44ad64056c7ef17c4@ds135029.mlab.com:35029/festivalplanner');
   mongoose.connect('localhost:27017/festivalplanner');
 } else{
-  mongoose.connect('mongodb://127.0.0.1:27017/festivalplanner');
+  mongoose.connect('127.0.0.1:27017/festivalplanner');
 }
 
 var db = mongoose.connection;
 
 db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function() {
+db.once('openUri()', function() {
   // we're connected!
 });
 

@@ -7,6 +7,13 @@ var get_object_id = require('../../helper');
 
 var Performance = require('../../models/performance');
 
+router.get('/', function(req, res, next) {
+  Performance.find({})
+  .exec(function (err, festival) {
+    res.json(festival);
+  });
+});
+
 router.get('/:id', function(req, res, next) {
 	Performance.find({
 		festival: get_object_id(req.params.id)
